@@ -22,7 +22,12 @@ export default async function PriceListPage({ params }: { params: Promise<{ lang
   return (
     <main className="wrap">
       <header className="top">
-        <h1>Saloon <span>{L.title}</span></h1>
+        <h1 className="brand">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="Saloon Caffe Bar" width={470} height={254} />
+          <span className="sr-only">{L.title}</span>
+          <span className="brand-title" aria-hidden="true">{L.title}</span>
+        </h1>
         <nav aria-label="Language">
           {LANGS.map((l) => (
             <Link key={l} href={`/${l}`} aria-current={l === lang ? "true" : undefined}>

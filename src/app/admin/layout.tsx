@@ -10,7 +10,11 @@ export default async function AdminLayout({ children }: { children: ReactNode })
   return (
     <main className="wrap">
       <header className="top">
-        <strong>Saloon admin</strong>
+        <span className="brand">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="Saloon Caffe Bar" width={470} height={254} />
+          <span className="brand-title">Admin</span>
+        </span>
         <span>
           {user.email} ({user.role})
           <form action={logoutAction} style={{ display: "inline", marginLeft: ".75rem" }}>

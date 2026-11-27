@@ -52,7 +52,13 @@ a { color: var(--accent); }
   padding-bottom: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border);
 }
 .top h1 { margin: 0; font-size: 1.6rem; font-weight: 800; letter-spacing: -.01em; }
-.top h1 span { color: var(--accent); }
+.brand { display: flex; align-items: center; gap: 1rem; }
+.brand img { height: 4.5rem; width: auto; display: block; }
+.brand-title { color: var(--accent); font-size: 1.1rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.login-brand { justify-content: center; margin: 1.5rem 0 1rem; }
+.login-brand img { height: 6rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 560px) { .brand img { height: 3.25rem; } .brand-title { font-size: .9rem; } }
 nav { display: flex; gap: .35rem; }
 nav a {
   margin: 0; padding: .3rem .8rem; border: 1px solid var(--border); border-radius: 999px;
