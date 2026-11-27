@@ -25,7 +25,7 @@ The last header is the "Sidrena cijena" (anchored price) and **auto-rolls monthl
 | 3 | CMS: edit all item fields inline (name HR/EN, qty, current + anchored price), price history + audit log, revalidate public page | **done** (unit-tested; no e2e for the admin form yet) |
 | 4 | CMS: add/delete/reorder items, add/rename/hide/reorder groups | **done** (unit + e2e, all passing) |
 | 5 | User management (admin only: create/disable users, roles, reset/change password, never remove last admin) | **done** (unit + e2e passing) |
-| 6 | Styling (mobile-first, print stylesheet, a11y, Lighthouse ≥ 90) | **done** except the Lighthouse score, not yet measured |
+| 6 | Styling (mobile-first, print stylesheet, a11y, Lighthouse ≥ 90) | **done** (Lighthouse prod build: 100/100/100/100 on /hr and /en, mobile + desktop) |
 | 7 | Deploy to Vercel + Neon, env vars (`DATABASE_URL`, `AUTH_SECRET`), smoke tests | todo |
 
 Each phase ends with passing tests (unit/integration with Vitest on in-memory PGlite, e2e with Playwright).
@@ -66,3 +66,5 @@ Work is on branch `claude/hopeful-archimedes-kp9k1g` (3 commits ahead of `main`:
 - Favicon: `src/app/icon.svg` (built from `resources/icon.svg` on a dark rounded square). Logo: `public/logo.png` (copy of `resources/logo.png`).
 - Public page: skip link, sticky "jump to group" bar, print stylesheet (A4, logo inverted), per-language title/description/hreflang.
 - Phase 7: public page is still `force-dynamic`. For Vercel consider ISR (`revalidate = 3600`, since the anchor label depends on the month) and re-check `revalidatePath` after CMS saves.
+- SEO: `SITE_URL` env var (see `.env.example`) feeds canonical/hreflang/sitemap/robots (`src/lib/site.ts`, `src/app/robots.ts`, `src/app/sitemap.ts`). **Set it to the real domain on Vercel in Phase 7.**
+- Lighthouse recipe: `PGLITE_DIR=.data/preview NEXT_DIST_DIR=.next-e2e` -> `npx next build && npx next start -p 3100`, then `npx lighthouse@13.6.0 http://localhost:3100/hr` (use an installed Chrome via `CHROME_PATH`). Delete `.next-e2e` afterwards so e2e's dev server starts clean.

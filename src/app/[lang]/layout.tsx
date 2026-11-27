@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { isLang, LANGS, t } from "@/lib/i18n";
+import { SITE_URL } from "@/lib/site";
 import "../globals.css";
 
 export const viewport: Viewport = { themeColor: "#0e0f12" };
@@ -15,6 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params;
   if (!isLang(lang)) return {};
   return {
+    metadataBase: new URL(SITE_URL),
     title: `Saloon Caffe Bar – ${t(lang).title}`,
     description: DESCRIPTION[lang],
     alternates: { canonical: `/${lang}`, languages: Object.fromEntries(LANGS.map((l) => [l, `/${l}`])) },
