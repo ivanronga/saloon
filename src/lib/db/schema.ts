@@ -27,3 +27,26 @@ export const settings = pgTable("settings", {
   value: text("value").notNull(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  name: text("name").notNull().default(""),
+  role: text("role", { enum: ["admin", "editor"] }).notNull().default("editor"),
+  passwordHash: text("password_hash").notNull(),
+  active: boolean("active").notNull().default(true),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const sessions = pgTable("sessions", {
+  tokenHash: text("token_hash").primaryKey(), // sha256 of the cookie token; raw token is never stored
+  userId: integer("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const loginAttempts = pgTable("login_attempts", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull(),
+  at: timestamp("at").notNull().defaultNow(),
+});

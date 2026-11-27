@@ -11,10 +11,12 @@
     "test": "vitest run",
     "e2e": "playwright test --trace off",
     "seed": "tsx scripts/seed.ts",
+    "create-admin": "tsx scripts/create-admin.ts",
     "check": "npm run lint && npm run typecheck && npm run test"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.6.0",
+    "@node-rs/argon2": "^2.2.2",
     "drizzle-orm": "^0.45.4",
     "next": "^15.5.29",
     "react": "^19.3.1",

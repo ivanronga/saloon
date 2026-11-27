@@ -8,6 +8,13 @@
       "when": 1795773131984,
       "tag": "0000_right_tyrannus",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795773464984,
+      "tag": "0001_chubby_fallen_one",
+      "breakpoints": true
     }
   ]
 }
