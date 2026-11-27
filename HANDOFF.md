@@ -22,7 +22,7 @@ The last header is the "Sidrena cijena" (anchored price) and **auto-rolls monthl
 | 0 | Scaffold, Drizzle+PGlite, security headers, lint/typecheck/vitest/playwright | **done** |
 | 1 | Seed from PDF (125 items, 12 groups), public `/hr` `/en` pages, anchor label | **done** |
 | 2 | Login/logout, argon2id, rate limit, protected `/admin`, `create-admin` script | **done** |
-| 3 | CMS: edit all item fields inline (name HR/EN, qty, current + anchored price), price history + audit log, revalidate public page | **next** |
+| 3 | CMS: edit all item fields inline (name HR/EN, qty, current + anchored price), price history + audit log, revalidate public page | **done** (unit-tested; no e2e for the admin form yet) |
 | 4 | CMS: add/delete/reorder items, add/rename/hide/reorder groups | todo |
 | 5 | User management (admin only: create/disable users, roles, reset/change password, never remove last admin) | todo |
 | 6 | Styling (mobile-first, print stylesheet, a11y, Lighthouse ≥ 90) | todo |

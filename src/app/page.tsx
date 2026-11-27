@@ -1,7 +1,6 @@
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
-  const al = (await headers()).get("accept-language") ?? "";
-  redirect(/^\s*en/i.test(al) ? "/en" : "/hr");
+// Croatian is the default language; English is reachable via the language switch (/en).
+export default function Home() {
+  redirect("/hr");
 }

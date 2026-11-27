@@ -8,20 +8,35 @@ const eur = (c: number | null) => (c == null ? "" : (c / 100).toFixed(2).replace
 export default function ItemRow({ item }: { item: typeof items.$inferSelect }) {
   const [state, action, pending] = useActionState(saveItemAction, undefined);
   return (
-    <form action={action} className="item-row">
+    <form action={action} className="item-card">
       <input type="hidden" name="id" value={item.id} />
-      <input name="nameHr" defaultValue={item.nameHr} aria-label="Naziv HR" required maxLength={120} />
-      <input name="nameEn" defaultValue={item.nameEn} aria-label="Name EN" required maxLength={120} />
-      <input name="qtyText" defaultValue={item.qtyText} aria-label="Količina / Quantity" maxLength={40} size={8} />
-      <input name="price" defaultValue={eur(item.priceCents)} aria-label="Aktualna cijena / Current price" inputMode="decimal" required size={7} />
-      <input name="anchorPrice" defaultValue={eur(item.anchorPriceCents)} aria-label="Sidrena cijena / Anchored price" inputMode="decimal" size={7} />
-      <input name="noteHr" defaultValue={item.noteHr} aria-label="Napomena HR" maxLength={300} />
-      <input name="noteEn" defaultValue={item.noteEn} aria-label="Note EN" maxLength={300} />
-      <button disabled={pending}>Spremi / Save</button>
-      <span role="status">
-        {state?.ok ? "✓" : ""}
-        {state?.error ? <span className="error">{state.error}</span> : null}
-      </span>
+
+      <fieldset>
+        <legend>🇭🇷 Hrvatski</legend>
+        <label>Naziv<input name="nameHr" defaultValue={item.nameHr} required maxLength={120} /></label>
+        <label>Napomena<input name="noteHr" defaultValue={item.noteHr} maxLength={300} /></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>🇬🇧 English</legend>
+        <label>Name<input name="nameEn" defaultValue={item.nameEn} required maxLength={120} /></label>
+        <label>Note<input name="noteEn" defaultValue={item.noteEn} maxLength={300} /></label>
+      </fieldset>
+
+      <fieldset className="fs-price">
+        <legend>€ Količina i cijene / Quantity &amp; prices</legend>
+        <label>Količina / Quantity<input name="qtyText" defaultValue={item.qtyText} maxLength={40} placeholder="0,10 l" /></label>
+        <label>Aktualna cijena / Current price (€)<input name="price" defaultValue={eur(item.priceCents)} inputMode="decimal" required placeholder="1,60" /></label>
+        <label>Sidrena cijena / Anchored price (€)<input name="anchorPrice" defaultValue={eur(item.anchorPriceCents)} inputMode="decimal" placeholder="1,70" /></label>
+      </fieldset>
+
+      <div className="item-actions">
+        <button disabled={pending}>{pending ? "Spremam… / Saving…" : "Spremi / Save"}</button>
+        <span role="status">
+          {state?.ok ? <span className="ok">✓ Spremljeno / Saved</span> : null}
+          {state?.error ? <span className="error">{state.error}</span> : null}
+        </span>
+      </div>
     </form>
   );
 }

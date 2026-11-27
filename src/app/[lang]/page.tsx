@@ -22,7 +22,7 @@ export default async function PriceListPage({ params }: { params: Promise<{ lang
   return (
     <main className="wrap">
       <header className="top">
-        <h1>Saloon – {L.title}</h1>
+        <h1>Saloon <span>{L.title}</span></h1>
         <nav aria-label="Language">
           {LANGS.map((l) => (
             <Link key={l} href={`/${l}`} aria-current={l === lang ? "true" : undefined}>

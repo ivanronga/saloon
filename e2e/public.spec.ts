@@ -18,8 +18,10 @@ test("EN page is translated", async ({ page }) => {
   await expect(page.getByRole("columnheader", { name: /Price \d{1,2} \w{3} \d{4}/ }).first()).toBeVisible();
 });
 
-test("root redirects and unknown lang 404s", async ({ page }) => {
+test("root redirects to HR (even for English browsers) and unknown lang 404s", async ({ browser }) => {
+  const ctx = await browser.newContext({ locale: "en-GB", extraHTTPHeaders: { "Accept-Language": "en-GB,en;q=0.9" } });
+  const page = await ctx.newPage();
   await page.goto("/");
-  await expect(page).toHaveURL(/\/(hr|en)$/);
+  await expect(page).toHaveURL(/\/hr$/);
   expect((await page.goto("/xx"))?.status()).toBe(404);
 });
