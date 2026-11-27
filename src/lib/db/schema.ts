@@ -50,3 +50,24 @@ export const loginAttempts = pgTable("login_attempts", {
   email: text("email").notNull(),
   at: timestamp("at").notNull().defaultNow(),
 });
+
+export const priceHistory = pgTable("price_history", {
+  id: serial("id").primaryKey(),
+  itemId: integer("item_id").notNull().references(() => items.id, { onDelete: "cascade" }),
+  oldPriceCents: integer("old_price_cents").notNull(),
+  newPriceCents: integer("new_price_cents").notNull(),
+  oldAnchorCents: integer("old_anchor_cents"),
+  newAnchorCents: integer("new_anchor_cents"),
+  userId: integer("user_id").references(() => users.id, { onDelete: "set null" }),
+  at: timestamp("at").notNull().defaultNow(),
+});
+
+export const auditLog = pgTable("audit_log", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").references(() => users.id, { onDelete: "set null" }),
+  action: text("action").notNull(),
+  entity: text("entity").notNull(),
+  entityId: integer("entity_id"),
+  detail: text("detail").notNull().default("{}"), // JSON: {field: [old, new]}
+  at: timestamp("at").notNull().defaultNow(),
+});

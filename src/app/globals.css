@@ -13,3 +13,6 @@ footer { margin-top: 2rem; color: #444; font-size: .9rem; }
 .form { display: grid; gap: .75rem; }
 .form label { display: grid; gap: .25rem; }
 .error { color: #b00020; margin: 0; }
+
+.item-row { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: .5rem; align-items: center; }
+.item-row input { padding: .25rem; }
