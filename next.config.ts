@@ -12,6 +12,10 @@ const config: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR ?? ".next",
   poweredByHeader: false,
   serverExternalPackages: ["@electric-sql/pglite"],
+  async redirects() {
+    // Croatian is the default language.
+    return [{ source: "/", destination: "/hr", permanent: false }];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

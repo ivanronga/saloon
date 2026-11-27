@@ -20,7 +20,9 @@ export default async function PriceListPage({ params }: { params: Promise<{ lang
   const L = t(lang);
 
   return (
-    <main className="wrap">
+    <>
+    <a className="skip" href="#content">{L.skip}</a>
+    <main className="wrap" id="content">
       <header className="top">
         <h1 className="brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -30,12 +32,18 @@ export default async function PriceListPage({ params }: { params: Promise<{ lang
         </h1>
         <nav aria-label="Language">
           {LANGS.map((l) => (
-            <Link key={l} href={`/${l}`} aria-current={l === lang ? "true" : undefined}>
+            <Link key={l} href={`/${l}`} lang={l} hrefLang={l} aria-current={l === lang ? "true" : undefined}>
               {l.toUpperCase()}
             </Link>
           ))}
         </nav>
       </header>
+
+      <nav className="jump" aria-label={L.groups}>
+        {list.map((g) => (
+          <a key={g.id} href={`#g${g.id}`}>{lang === "hr" ? g.nameHr : g.nameEn}</a>
+        ))}
+      </nav>
 
       {list.map((g) => (
         <section key={g.id} aria-labelledby={`g${g.id}`}>
@@ -77,5 +85,6 @@ export default async function PriceListPage({ params }: { params: Promise<{ lang
         </footer>
       )}
     </main>
+    </>
   );
 }

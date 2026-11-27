@@ -25,7 +25,7 @@ The last header is the "Sidrena cijena" (anchored price) and **auto-rolls monthl
 | 3 | CMS: edit all item fields inline (name HR/EN, qty, current + anchored price), price history + audit log, revalidate public page | **done** (unit-tested; no e2e for the admin form yet) |
 | 4 | CMS: add/delete/reorder items, add/rename/hide/reorder groups | **done** (unit + e2e, all passing) |
 | 5 | User management (admin only: create/disable users, roles, reset/change password, never remove last admin) | **done** (unit + e2e passing) |
-| 6 | Styling (mobile-first, print stylesheet, a11y, Lighthouse ≥ 90) | todo |
+| 6 | Styling (mobile-first, print stylesheet, a11y, Lighthouse ≥ 90) | **done** except the Lighthouse score, not yet measured |
 | 7 | Deploy to Vercel + Neon, env vars (`DATABASE_URL`, `AUTH_SECRET`), smoke tests | todo |
 
 Each phase ends with passing tests (unit/integration with Vitest on in-memory PGlite, e2e with Playwright).
@@ -60,3 +60,9 @@ Work is on branch `claude/hopeful-archimedes-kp9k1g` (3 commits ahead of `main`:
 - `npm install` reported audit warnings; run `npm audit` and review in Phase 7 at the latest.
 - Public page is `force-dynamic` for now; switch to cached + `revalidatePath` after CMS saves (Phase 3).
 - Security checklist to keep verifying: Zod validation on every action, authz in every server action, CSP header still to add (only basic headers exist), no secrets in repo.
+
+## Phase 6 notes
+- App Router now has two root layouts: `src/app/[lang]/layout.tsx` (public, `<html lang>` follows the URL) and `src/app/(cms)/layout.tsx` (admin + login). `/` redirects to `/hr` via `next.config.ts`; there is no `src/app/layout.tsx`.
+- Favicon: `src/app/icon.svg` (built from `resources/icon.svg` on a dark rounded square). Logo: `public/logo.png` (copy of `resources/logo.png`).
+- Public page: skip link, sticky "jump to group" bar, print stylesheet (A4, logo inverted), per-language title/description/hreflang.
+- Phase 7: public page is still `force-dynamic`. For Vercel consider ISR (`revalidate = 3600`, since the anchor label depends on the month) and re-check `revalidatePath` after CMS saves.

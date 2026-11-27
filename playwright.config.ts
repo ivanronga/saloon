@@ -6,6 +6,7 @@ export default defineConfig({
   testDir: "e2e",
   workers: 1,
   timeout: 90000,
+  expect: { timeout: 15000 }, // first request to each route compiles it in dev
   webServer: {
     command: `npm run seed && npm run create-admin && npx next dev -p ${PORT}`,
     url: `http://localhost:${PORT}/hr`,
