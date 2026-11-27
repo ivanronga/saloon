@@ -5,6 +5,7 @@ const PORT = 3100;
 export default defineConfig({
   testDir: "e2e",
   workers: 1,
+  timeout: 90000,
   webServer: {
     command: `npm run seed && npm run create-admin && npx next dev -p ${PORT}`,
     url: `http://localhost:${PORT}/hr`,
@@ -19,6 +20,7 @@ export default defineConfig({
   },
   use: {
     baseURL: `http://localhost:${PORT}`,
+    actionTimeout: 10000,
     // Optional: reuse a pre-installed Chromium (CI/cloud) instead of `npx playwright install`.
     launchOptions: process.env.PW_CHROMIUM ? { executablePath: process.env.PW_CHROMIUM } : {},
   },

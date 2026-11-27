@@ -25,7 +25,7 @@ test("admin can add, edit, reorder, hide and delete groups and items", async ({ 
   // --- add two items
   for (const [hr, en, price] of [["Prvi", "First", "2,50"], ["Drugi", "Second", "3,00"]]) {
     const add = section.locator("details.new");
-    await add.locator("summary").click();
+    if (!(await add.evaluate((d: HTMLDetailsElement) => d.open))) await add.locator("summary").click();
     await add.getByLabel("Naziv", { exact: true }).fill(hr);
     await add.getByLabel("Name", { exact: true }).fill(en);
     await add.getByLabel(/Količina/).fill("0,25 l");
@@ -49,6 +49,7 @@ test("admin can add, edit, reorder, hide and delete groups and items", async ({ 
   const drugi = s2.locator("details.item-details:not(.new)").filter({ hasText: "Drugi" });
   await drugi.locator("summary").click();
   await drugi.getByRole("button", { name: /Pomakni gore/ }).click();
+  await expect(s2.locator("details.item-details:not(.new)").first()).toContainText("Drugi"); // wait for the server action
   await page.goto("/hr");
   await expect(hrRows.nth(0)).toContainText("Drugi");
 
@@ -58,6 +59,7 @@ test("admin can add, edit, reorder, hide and delete groups and items", async ({ 
     .locator("details.item-details:not(.new)").filter({ hasText: "Drugi" });
   await drugi2.locator("summary").click();
   await drugi2.getByRole("button", { name: /Sakrij/ }).click();
+  await expect(drugi2.locator(".badge")).toBeVisible(); // wait for the server action
   await page.goto("/hr");
   await expect(hrRows).toHaveCount(1);
 
