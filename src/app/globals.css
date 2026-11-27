@@ -132,6 +132,21 @@ button:disabled { opacity: .6; cursor: progress; }
 .item-card fieldset { border: 1px solid var(--border); border-radius: 8px; padding: .5rem .75rem .75rem; margin: 0; display: grid; gap: .5rem; }
 .item-card legend { font-weight: 700; padding: 0 .35rem; color: var(--accent); }
 .item-card label { display: grid; gap: .2rem; font-size: .85rem; color: var(--muted); }
+.toolbar { display: flex; flex-wrap: wrap; gap: .4rem; padding: .6rem .85rem 0; align-items: center; }
+.toolbar form { margin: 0; }
+.btn-small { padding: .3rem .65rem; font-size: .85rem; background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+.btn-small:hover { border-color: var(--muted); filter: none; }
+.btn-danger { color: var(--danger); }
+.badge { margin-left: .5rem; padding: .1rem .5rem; border-radius: 999px; font-size: .7rem; font-weight: 600; letter-spacing: 0; text-transform: none; background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
+.is-hidden { opacity: .6; }
+.group-tools { margin-bottom: .6rem; }
+.group-tools > summary { cursor: pointer; color: var(--muted); font-size: .85rem; padding: .2rem 0; }
+.group-tools .toolbar { padding-left: 0; }
+.group-rename { display: flex; flex-wrap: wrap; gap: .6rem; align-items: end; padding: .6rem 0; }
+.group-rename label { display: grid; gap: .2rem; font-size: .85rem; color: var(--muted); flex: 1 1 14rem; }
+.new-group { margin-top: 2rem; padding: .85rem; border: 1px dashed var(--border); border-radius: var(--radius); }
+.new-group strong { flex-basis: 100%; }
+.item-details.new { border-style: dashed; }
 .item-actions { grid-column: 1 / -1; display: flex; gap: .75rem; align-items: center; }
 
 @media print {

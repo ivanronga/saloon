@@ -8,8 +8,8 @@ test("anonymous is redirected to login", async ({ page }) => {
   await expect(page).toHaveURL(/\/login$/);
 });
 
-test("forged cookie does not grant access", async ({ page, context }) => {
-  await context.addCookies([{ name: "saloon_session", value: "forged", url: "http://localhost:3000" }]);
+test("forged cookie does not grant access", async ({ page, context, baseURL }) => {
+  await context.addCookies([{ name: "saloon_session", value: "forged", url: baseURL! }]);
   await page.goto("/admin");
   await expect(page).toHaveURL(/\/login$/);
 });
@@ -22,7 +22,7 @@ test("wrong password is rejected", async ({ page }) => {
   await expect(page.locator("p.error")).toContainText("Invalid credentials");
 });
 
-test("login sets a hardened cookie, logout invalidates the session", async ({ page, context }) => {
+test("login sets a hardened cookie, logout invalidates the session", async ({ page, context, baseURL }) => {
   await page.goto("/login");
   await page.getByLabel("Email").fill(EMAIL);
   await page.getByLabel(/Lozinka/).fill(PASSWORD);
@@ -37,7 +37,7 @@ test("login sets a hardened cookie, logout invalidates the session", async ({ pa
   await expect(page).toHaveURL(/\/login$/);
 
   // replaying the old token must fail server-side
-  await context.addCookies([{ name: "saloon_session", value: token, url: "http://localhost:3000" }]);
+  await context.addCookies([{ name: "saloon_session", value: token, url: baseURL! }]);
   await page.goto("/admin");
   await expect(page).toHaveURL(/\/login$/);
 });

@@ -1,9 +1,24 @@
 import { defineConfig } from "@playwright/test";
+
+// Fully isolated from `npm run dev`: own port, own PGlite folder, own Next build folder.
+const PORT = 3100;
 export default defineConfig({
   testDir: "e2e",
-  webServer: { command: "npm run seed && ADMIN_EMAIL=e2e-admin@example.com ADMIN_PASSWORD=e2e-password-12345 npm run create-admin && npm run dev", url: "http://localhost:3000/hr", reuseExistingServer: !process.env.CI, timeout: 120000 },
+  workers: 1,
+  webServer: {
+    command: `npm run seed && npm run create-admin && npx next dev -p ${PORT}`,
+    url: `http://localhost:${PORT}/hr`,
+    reuseExistingServer: false,
+    timeout: 180000,
+    env: {
+      PGLITE_DIR: ".data/e2e",
+      NEXT_DIST_DIR: ".next-e2e",
+      ADMIN_EMAIL: "e2e-admin@example.com",
+      ADMIN_PASSWORD: "e2e-password-12345",
+    },
+  },
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL: `http://localhost:${PORT}`,
     // Optional: reuse a pre-installed Chromium (CI/cloud) instead of `npx playwright install`.
     launchOptions: process.env.PW_CHROMIUM ? { executablePath: process.env.PW_CHROMIUM } : {},
   },

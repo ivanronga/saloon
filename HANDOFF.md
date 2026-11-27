@@ -23,7 +23,7 @@ The last header is the "Sidrena cijena" (anchored price) and **auto-rolls monthl
 | 1 | Seed from PDF (125 items, 12 groups), public `/hr` `/en` pages, anchor label | **done** |
 | 2 | Login/logout, argon2id, rate limit, protected `/admin`, `create-admin` script | **done** |
 | 3 | CMS: edit all item fields inline (name HR/EN, qty, current + anchored price), price history + audit log, revalidate public page | **done** (unit-tested; no e2e for the admin form yet) |
-| 4 | CMS: add/delete/reorder items, add/rename/hide/reorder groups | todo |
+| 4 | CMS: add/delete/reorder items, add/rename/hide/reorder groups | **done** (unit + e2e written; e2e needs `npx playwright install chromium`, not yet run) |
 | 5 | User management (admin only: create/disable users, roles, reset/change password, never remove last admin) | todo |
 | 6 | Styling (mobile-first, print stylesheet, a11y, Lighthouse ≥ 90) | todo |
 | 7 | Deploy to Vercel + Neon, env vars (`DATABASE_URL`, `AUTH_SECRET`), smoke tests | todo |
