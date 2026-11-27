@@ -24,7 +24,7 @@ The last header is the "Sidrena cijena" (anchored price) and **auto-rolls monthl
 | 2 | Login/logout, argon2id, rate limit, protected `/admin`, `create-admin` script | **done** |
 | 3 | CMS: edit all item fields inline (name HR/EN, qty, current + anchored price), price history + audit log, revalidate public page | **done** (unit-tested; no e2e for the admin form yet) |
 | 4 | CMS: add/delete/reorder items, add/rename/hide/reorder groups | **done** (unit + e2e, all passing) |
-| 5 | User management (admin only: create/disable users, roles, reset/change password, never remove last admin) | todo |
+| 5 | User management (admin only: create/disable users, roles, reset/change password, never remove last admin) | **done** (unit + e2e passing) |
 | 6 | Styling (mobile-first, print stylesheet, a11y, Lighthouse ≥ 90) | todo |
 | 7 | Deploy to Vercel + Neon, env vars (`DATABASE_URL`, `AUTH_SECRET`), smoke tests | todo |
 
@@ -47,8 +47,8 @@ npm install
 npm run seed
 npm run create-admin     # email + password (min 12 chars)
 npm run dev              # http://localhost:3000  (/hr, /en, /login)
-npm run check            # lint + typecheck + unit tests  (21 tests)
-npm run e2e              # 9 browser tests (isolated: port 3100, .data/e2e); first time: npx playwright install chromium
+npm run check            # lint + typecheck + unit tests  (30 tests)
+npm run e2e              # 10 browser tests (isolated: port 3100, .data/e2e); first time: npx playwright install chromium
 ```
 (In the cloud sandbox e2e needs `PW_CHROMIUM=/opt/pw-browsers/chromium`; not needed locally.)
 

@@ -1,5 +1,5 @@
 import { createHash, randomBytes } from "node:crypto";
-import { and, eq, gt } from "drizzle-orm";
+import { and, eq, gt, ne } from "drizzle-orm";
 import type { Db } from "../db";
 import { sessions, users } from "../db/schema";
 
@@ -27,4 +27,11 @@ export async function getSessionUser(db: Db, token: string | undefined, now = ne
 
 export async function destroySession(db: Db, token: string | undefined) {
   if (token) await db.delete(sessions).where(eq(sessions.tokenHash, sha(token)));
+}
+
+/** Revoke every session of a user, optionally keeping the one identified by `exceptToken`. */
+export async function destroyUserSessions(db: Db, userId: number, exceptToken?: string) {
+  await db.delete(sessions).where(
+    exceptToken ? and(eq(sessions.userId, userId), ne(sessions.tokenHash, sha(exceptToken))) : eq(sessions.userId, userId),
+  );
 }

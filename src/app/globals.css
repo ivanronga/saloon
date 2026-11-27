@@ -153,3 +153,14 @@ button:disabled { opacity: .6; cursor: progress; }
   :root { color-scheme: light; --bg: #fff; --surface: #fff; --surface-2: #f2f2f2; --border: #bbb; --text: #000; --muted: #444; --accent: #000; }
   nav { display: none; }
 }
+
+/* admin nav + users */
+.admin-nav { margin: -.5rem 0 1.25rem; }
+.admin-nav a { margin: 0; }
+select { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: .45rem .6rem; }
+.user-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: .75rem .85rem; margin-bottom: .5rem; }
+.user-actions { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; margin-top: .6rem; align-items: start; }
+.inline-form { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin: 0; }
+.inline-form input:not([type=hidden]) { width: 14rem; }
+.user-form { display: flex; flex-wrap: wrap; gap: .6rem; align-items: end; }
+.user-form label { display: grid; gap: .2rem; font-size: .85rem; color: var(--muted); flex: 1 1 12rem; }
